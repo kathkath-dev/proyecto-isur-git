@@ -18,3 +18,15 @@ jobs:
 
       - name: Mensaje
         run: echo "Pipeline ejecutado correctamente"
+
+      - name: Construir imagen Docker
+        run: docker build -t mi-app .
+
+      - name: Ejecutar contenedor
+        run: docker run -d -p 8090:80 mi-app
+
+      - name: Validar contenedor
+        run: |
+          sleep 3
+          docker ps
+          curl http://localhost:8090
